@@ -15,6 +15,7 @@ import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicSignupRouteImport } from './routes/_public/signup'
 import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -44,18 +45,26 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedClassesMesClassesRoute =
+  AuthenticatedClassesMesClassesRouteImport.update({
+    id: '/classes/mes-classes',
+    path: '/classes/mes-classes',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -65,12 +74,13 @@ export interface FileRoutesById {
   '/_public/login': typeof PublicLoginRoute
   '/_public/signup': typeof PublicSignupRoute
   '/_public/': typeof PublicIndexRoute
+  '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dashboard' | '/login' | '/signup' | '/'
+  fullPaths: '/dashboard' | '/login' | '/signup' | '/' | '/classes/mes-classes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/dashboard' | '/login' | '/signup' | '/'
+  to: '/dashboard' | '/login' | '/signup' | '/' | '/classes/mes-classes'
   id:
     | '__root__'
     | '/_authenticated'
@@ -79,6 +89,7 @@ export interface FileRouteTypes {
     | '/_public/login'
     | '/_public/signup'
     | '/_public/'
+    | '/_authenticated/classes/mes-classes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,15 +141,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/classes/mes-classes': {
+      id: '/_authenticated/classes/mes-classes'
+      path: '/classes/mes-classes'
+      fullPath: '/classes/mes-classes'
+      preLoaderRoute: typeof AuthenticatedClassesMesClassesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

@@ -1,5 +1,4 @@
 import { useNavigate } from '@tanstack/react-router'
-
 import CustomButton from '@/components/CustomButton'
 import { useScrollVisibility } from '@/hooks/useScrollVisibility'
 

@@ -1,3 +1,5 @@
+import { useNavigate } from '@tanstack/react-router'
+
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -15,6 +17,8 @@ import {
 import { Input } from '@/components/ui/input'
 
 export function LoginForm() {
+  const navigate = useNavigate()
+
   return (
     <div className="flex flex-col gap-6">
       <Card className="w-full max-w-[95%] sm:max-w-[75%] md:max-w-[50%] min-w-[310px] mx-auto">
@@ -55,7 +59,9 @@ export function LoginForm() {
                 </Button>
                 <FieldDescription className="text-center">
                   Vous n&apos;avez pas de compte ?{' '}
-                  <a href="#">S&apos;inscrire</a>
+                  <a onClick={() => navigate({ to: '/signup' })}>
+                    S&apos;inscrire
+                  </a>
                 </FieldDescription>
               </Field>
             </FieldGroup>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, Moon, Sun } from 'lucide-react'
 
 import {
   Sidebar,
@@ -16,6 +16,7 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 
 // Navigation pour ClassEasy
 const data = {
@@ -27,21 +28,21 @@ const data = {
     },
     {
       title: 'Gestion des Classes',
-      url: '#',
+      url: '/classes/mes-classes',
       items: [
         {
           title: 'Mes Classes',
-          url: '/classes',
+          url: '/classes/mes-classes',
           isActive: false,
         },
         {
           title: 'Créer une Classe',
-          url: '/classes/new',
+          url: '/classes/creer-une-classe',
           isActive: false,
         },
         {
           title: 'Archives',
-          url: '/classes/archive',
+          url: '/classes/archives',
           isActive: false,
         },
       ],
@@ -105,23 +106,53 @@ const currentUser = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [isDark, setIsDark] = React.useState(false)
+
+  React.useEffect(() => {
+    if (typeof document === 'undefined') return
+    document.documentElement.classList.toggle('dark', isDark)
+  }, [isDark])
+
+  const handleToggleTheme = React.useCallback(() => {
+    setIsDark((prev) => !prev)
+  }, [])
+
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <BookOpen className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">EasyClasse</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarHeader className="border-b border-sidebar-border">
+        <div className="flex w-full items-center justify-between gap-3">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild>
+                <a href="#">
+                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                    <BookOpen className="size-4" />
+                  </div>
+                  <div className="flex flex-col gap-0.5 leading-none">
+                    <span className="font-medium">EasyClasse</span>
+                  </div>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="shrink-0 rounded-full border border-border"
+            aria-pressed={isDark}
+            onClick={handleToggleTheme}
+          >
+            {isDark ? (
+              <Sun aria-hidden className="size-4" />
+            ) : (
+              <Moon aria-hidden className="size-4" />
+            )}
+            <span className="sr-only">
+              {isDark ? 'Activer le mode clair' : 'Activer le mode nuit'}
+            </span>
+          </Button>
+        </div>
       </SidebarHeader>
       <SidebarContent className="justify-center">
         <SidebarGroup>

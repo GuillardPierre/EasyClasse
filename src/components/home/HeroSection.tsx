@@ -1,3 +1,5 @@
+import { useNavigate } from '@tanstack/react-router'
+
 import CustomButton from '@/components/CustomButton'
 import { useScrollVisibility } from '@/hooks/useScrollVisibility'
 
@@ -7,6 +9,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onDiscoverClick }: HeroSectionProps) {
   const hasScrolled = useScrollVisibility()
+  const navigate = useNavigate()
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative px-4 md:px-8">
@@ -15,16 +18,21 @@ export default function HeroSection({ onDiscoverClick }: HeroSectionProps) {
           EasyClasse
         </h1>
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-center">
-          L'outil pour suivre l'évolution de vos élèves
+          L'outil pour suivre l'évolution de vos élèves,
         </h2>
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-center">
-          Pour les enseignants, par un enseignant
+          pour les enseignants, par un enseignant
         </h2>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2 w-full sm:w-auto">
           <CustomButton onClick={onDiscoverClick}>
             Découvrir l'outil
           </CustomButton>
-          <CustomButton variant="default">Connexion / Inscription</CustomButton>
+          <CustomButton
+            variant="default"
+            onClick={() => navigate({ to: '/login' })}
+          >
+            Connexion / Inscription
+          </CustomButton>
         </div>
       </div>
 

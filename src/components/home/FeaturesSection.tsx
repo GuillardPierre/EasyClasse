@@ -43,7 +43,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_props, ref) => {
       ref={ref}
       className="min-h-screen flex flex-col items-center justify-center"
     >
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2 mb-2">
         {features.map((feature) => (
           <CustomCard
             key={feature.title}

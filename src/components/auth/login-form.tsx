@@ -53,7 +53,11 @@ export function LoginForm() {
                 <Input id="password" type="password" required />
               </Field>
               <Field>
-                <Button type="submit">Se connecter</Button>
+                <Button
+                  onClick={() => navigate({ to: '/dashboard', replace: true })}
+                >
+                  Se connecter
+                </Button>
                 <Button variant="outline" type="button">
                   Se connecter avec Google
                 </Button>

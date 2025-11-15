@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import FeaturesSection from '@/components/home/FeaturesSection'
 import HeroSection from '@/components/home/HeroSection'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/_public/')({ component: App })
 
 function App() {
   const featuresSectionRef = useRef<HTMLElement>(null)

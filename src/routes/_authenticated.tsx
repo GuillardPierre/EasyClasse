@@ -37,7 +37,7 @@ function FloatingSidebarTrigger() {
       className="fixed z-50 rounded-full border border-border bg-background/90 shadow-lg backdrop-blur transition-[left,top] duration-200 ease-linear"
       style={{
         left: state === 'collapsed' ? collapsedLeft : expandedLeft,
-        top: isMobile ? '1rem' : '1.25rem',
+        top: isMobile ? '1rem' : '1.2rem',
       }}
     />
   )

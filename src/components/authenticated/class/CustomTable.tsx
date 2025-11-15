@@ -42,6 +42,7 @@ export function CustomTable<T extends TableRowData>({
                 column.align === 'right' && 'text-right',
                 column.align === 'center' && 'text-center',
                 column.className,
+                'font-bold',
               )}
             >
               {column.label}

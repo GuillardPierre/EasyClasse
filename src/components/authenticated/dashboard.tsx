@@ -41,7 +41,7 @@ const recentActivities = [
 
 export function Dashboard() {
   return (
-    <div className="flex min-h-full flex-col justify-center space-y-6">
+    <div className="flex min-h-full flex-col justify-center space-y-6 py-12">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
@@ -72,7 +72,7 @@ export function Dashboard() {
 
         <RecentActivityCard
           activities={recentActivities}
-          className="col-span-3"
+          className="col-span-4 md:col-span-3"
         />
       </div>
     </div>

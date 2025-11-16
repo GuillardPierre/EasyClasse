@@ -44,11 +44,11 @@ const data = {
           url: '/classes/creer-une-classe',
           isActive: false,
         },
-        {
-          title: 'Archives',
-          url: '/classes/archives',
-          isActive: false,
-        },
+        // {
+        //   title: 'Archives',
+        //   url: '/classes/archives',
+        //   isActive: false,
+        // },
       ],
     },
     {
@@ -170,7 +170,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               const hasLink = item.url && item.url !== '#'
               return (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild={hasLink}>
+                  <SidebarMenuButton asChild={!!hasLink}>
                     {hasLink ? (
                       <Link to={item.url} className="font-medium">
                         {item.title}

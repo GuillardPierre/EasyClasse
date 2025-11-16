@@ -16,6 +16,7 @@ import { Route as PublicSignupRouteImport } from './routes/_public/signup'
 import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
+import { Route as AuthenticatedClassesCreerUneClasseRouteImport } from './routes/_authenticated/classes/creer-une-classe'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -51,12 +52,19 @@ const AuthenticatedClassesMesClassesRoute =
     path: '/classes/mes-classes',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedClassesCreerUneClasseRoute =
+  AuthenticatedClassesCreerUneClasseRouteImport.update({
+    id: '/classes/creer-une-classe',
+    path: '/classes/creer-une-classe',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRoutesByTo {
@@ -64,6 +72,7 @@ export interface FileRoutesByTo {
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRoutesById {
@@ -74,13 +83,26 @@ export interface FileRoutesById {
   '/_public/login': typeof PublicLoginRoute
   '/_public/signup': typeof PublicSignupRoute
   '/_public/': typeof PublicIndexRoute
+  '/_authenticated/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dashboard' | '/login' | '/signup' | '/' | '/classes/mes-classes'
+  fullPaths:
+    | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/'
+    | '/classes/creer-une-classe'
+    | '/classes/mes-classes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/dashboard' | '/login' | '/signup' | '/' | '/classes/mes-classes'
+  to:
+    | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/'
+    | '/classes/creer-une-classe'
+    | '/classes/mes-classes'
   id:
     | '__root__'
     | '/_authenticated'
@@ -89,6 +111,7 @@ export interface FileRouteTypes {
     | '/_public/login'
     | '/_public/signup'
     | '/_public/'
+    | '/_authenticated/classes/creer-une-classe'
     | '/_authenticated/classes/mes-classes'
   fileRoutesById: FileRoutesById
 }
@@ -148,16 +171,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClassesMesClassesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/classes/creer-une-classe': {
+      id: '/_authenticated/classes/creer-une-classe'
+      path: '/classes/creer-une-classe'
+      fullPath: '/classes/creer-une-classe'
+      preLoaderRoute: typeof AuthenticatedClassesCreerUneClasseRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedClassesCreerUneClasseRoute: typeof AuthenticatedClassesCreerUneClasseRoute
   AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedClassesCreerUneClasseRoute:
+    AuthenticatedClassesCreerUneClasseRoute,
   AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,
 }
 

@@ -1,9 +1,10 @@
 import { Plus } from 'lucide-react'
 
+import { Link } from '@tanstack/react-router'
+import { CustomTable } from './CustomTable'
+import type { TableColumn, TableRowData } from './CustomTable'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-
-import { CustomTable, type TableColumn, type TableRowData } from './CustomTable'
 
 type PrimaryClassRow = TableRowData & {
   id: string
@@ -14,7 +15,7 @@ type PrimaryClassRow = TableRowData & {
   assessmentsCount: number
 }
 
-const columns: TableColumn<PrimaryClassRow>[] = [
+const columns: Array<TableColumn<PrimaryClassRow>> = [
   { key: 'name', label: 'Nom de la classe', align: 'center' },
   { key: 'level', label: 'Classe', align: 'center' },
   { key: 'studentsCount', label: 'Élèves', align: 'center' },
@@ -22,7 +23,7 @@ const columns: TableColumn<PrimaryClassRow>[] = [
   { key: 'assessmentsCount', label: 'Évaluations', align: 'center' },
 ]
 
-const mockClasses: PrimaryClassRow[] = [
+const mockClasses: Array<PrimaryClassRow> = [
   {
     id: '1',
     name: 'Classe Rouge',
@@ -70,13 +71,13 @@ export default function ClassList() {
           </CardContent>
         </Card>
         <Button asChild>
-          <a
-            href="/classes/creer-une-classe"
+          <Link
+            to="/classes/creer-une-classe"
             className="flex items-center gap-2"
           >
             <Plus className="size-4" />
             Ajouter une classe
-          </a>
+          </Link>
         </Button>
       </div>
     </div>

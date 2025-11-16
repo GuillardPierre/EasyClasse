@@ -1,6 +1,7 @@
 import type { UseFormRegisterReturn } from 'react-hook-form'
 
 import { FieldLabel } from '@/components/ui/field'
+import { FormError } from '@/components/ui/form-error'
 
 interface Student {
   id: string
@@ -41,11 +42,7 @@ export function StudentsPicker({
         Vous pourrez modifier la liste des élèves après la création de la
         classe.
       </p>
-      {error ? (
-        <p className="text-xs text-destructive mt-0" role="alert">
-          {error}
-        </p>
-      ) : null}
+      <FormError message={error} />
     </div>
   )
 }

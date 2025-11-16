@@ -1,4 +1,5 @@
 import { Field, FieldLabel } from '@/components/ui/field'
+import { FormError } from '@/components/ui/form-error'
 import {
   Select,
   SelectContent,
@@ -49,11 +50,7 @@ export function ClassLevelSelect({
           <SelectItem value="Terminale">Terminale</SelectItem>
         </SelectContent>
       </Select>
-      {error ? (
-        <p className="text-xs text-destructive mt-0" role="alert">
-          {error}
-        </p>
-      ) : null}
+      <FormError message={error} />
     </Field>
   )
 }

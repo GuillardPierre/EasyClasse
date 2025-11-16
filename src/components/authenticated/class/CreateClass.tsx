@@ -5,6 +5,7 @@ import { useCreateClassForm } from './useCreateClassForm'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { FormError } from '@/components/ui/form-error'
 import { Input } from '@/components/ui/input'
 
 export function CreateClass() {
@@ -33,7 +34,7 @@ export function CreateClass() {
               })}
               className="space-y-6"
             >
-              <FieldGroup>
+              <FieldGroup className="grid gap-4 md:grid-cols-2">
                 <Field>
                   <FieldLabel>Nom de la classe</FieldLabel>
                   <Input
@@ -41,11 +42,7 @@ export function CreateClass() {
                     placeholder="ex : 5ème A"
                     aria-invalid={Boolean(errors.name)}
                   />
-                  {errors.name ? (
-                    <p className="text-xs text-destructive mt-0" role="alert">
-                      {errors.name.message}
-                    </p>
-                  ) : null}
+                  <FormError message={errors.name?.message} />
                 </Field>
                 <ClassLevelSelect
                   value={selectedLevel}

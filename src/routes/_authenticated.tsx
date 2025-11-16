@@ -15,9 +15,11 @@ function AuthenticatedLayout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <Outlet />
+      <SidebarInset className="flex flex-1">
+        <div className="flex flex-1 items-center justify-center p-4">
+          <div className="w-full max-w-5xl">
+            <Outlet />
+          </div>
         </div>
         <FloatingSidebarTrigger />
       </SidebarInset>

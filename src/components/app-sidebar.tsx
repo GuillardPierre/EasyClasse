@@ -57,12 +57,12 @@ const data = {
       items: [
         {
           title: 'Tous les élèves',
-          url: '/students',
+          url: '/eleves/mes-eleves',
           isActive: false,
         },
         {
           title: 'Ajouter un Élève',
-          url: '/students/new',
+          url: '/eleves/creer-eleve',
           isActive: false,
         },
       ],
@@ -205,7 +205,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton asChild>
               <Link
                 to="/premium"
-                className="flex items-center justify-between gap-2"
+                className="flex items-center justify-between gap-2 py-5"
               >
                 <div className="flex flex-col text-left p-1">
                   <span className="text-sm font-medium">Passer en Premium</span>

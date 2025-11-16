@@ -8,30 +8,30 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-interface SchoolYearSelectProps {
+interface StudentClassSelectProps {
   value: string | undefined
-  years: Array<string>
+  options: Array<{ id: string; label: string }>
   onChange: (value: string) => void
   error?: string
 }
 
-export function SchoolYearSelect({
+export function StudentClassSelect({
   value,
-  years,
+  options,
   onChange,
   error,
-}: SchoolYearSelectProps) {
+}: StudentClassSelectProps) {
   return (
     <Field>
-      <FieldLabel>Année scolaire</FieldLabel>
+      <FieldLabel>Classe de l&apos;élève</FieldLabel>
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger aria-invalid={Boolean(error)}>
-          <SelectValue placeholder="Choisir une année" />
+          <SelectValue placeholder="Sélectionner une classe" />
         </SelectTrigger>
         <SelectContent>
-          {years.map((year) => (
-            <SelectItem key={year} value={year}>
-              {year}
+          {options.map((option) => (
+            <SelectItem key={option.id} value={option.label}>
+              {option.label}
             </SelectItem>
           ))}
         </SelectContent>

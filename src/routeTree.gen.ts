@@ -15,6 +15,8 @@ import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicSignupRouteImport } from './routes/_public/signup'
 import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedElevesMesElevesRouteImport } from './routes/_authenticated/eleves/mes-eleves'
+import { Route as AuthenticatedElevesCreerEleveRouteImport } from './routes/_authenticated/eleves/creer-eleve'
 import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
 import { Route as AuthenticatedClassesCreerUneClasseRouteImport } from './routes/_authenticated/classes/creer-une-classe'
 
@@ -46,6 +48,18 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedElevesMesElevesRoute =
+  AuthenticatedElevesMesElevesRouteImport.update({
+    id: '/eleves/mes-eleves',
+    path: '/eleves/mes-eleves',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedElevesCreerEleveRoute =
+  AuthenticatedElevesCreerEleveRouteImport.update({
+    id: '/eleves/creer-eleve',
+    path: '/eleves/creer-eleve',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedClassesMesClassesRoute =
   AuthenticatedClassesMesClassesRouteImport.update({
     id: '/classes/mes-classes',
@@ -66,6 +80,8 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
+  '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
+  '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
 }
 export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -74,6 +90,8 @@ export interface FileRoutesByTo {
   '/': typeof PublicIndexRoute
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
+  '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
+  '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,6 +103,8 @@ export interface FileRoutesById {
   '/_public/': typeof PublicIndexRoute
   '/_authenticated/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
+  '/_authenticated/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
+  '/_authenticated/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -95,6 +115,8 @@ export interface FileRouteTypes {
     | '/'
     | '/classes/creer-une-classe'
     | '/classes/mes-classes'
+    | '/eleves/creer-eleve'
+    | '/eleves/mes-eleves'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
@@ -103,6 +125,8 @@ export interface FileRouteTypes {
     | '/'
     | '/classes/creer-une-classe'
     | '/classes/mes-classes'
+    | '/eleves/creer-eleve'
+    | '/eleves/mes-eleves'
   id:
     | '__root__'
     | '/_authenticated'
@@ -113,6 +137,8 @@ export interface FileRouteTypes {
     | '/_public/'
     | '/_authenticated/classes/creer-une-classe'
     | '/_authenticated/classes/mes-classes'
+    | '/_authenticated/eleves/creer-eleve'
+    | '/_authenticated/eleves/mes-eleves'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -164,6 +190,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/eleves/mes-eleves': {
+      id: '/_authenticated/eleves/mes-eleves'
+      path: '/eleves/mes-eleves'
+      fullPath: '/eleves/mes-eleves'
+      preLoaderRoute: typeof AuthenticatedElevesMesElevesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/eleves/creer-eleve': {
+      id: '/_authenticated/eleves/creer-eleve'
+      path: '/eleves/creer-eleve'
+      fullPath: '/eleves/creer-eleve'
+      preLoaderRoute: typeof AuthenticatedElevesCreerEleveRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/classes/mes-classes': {
       id: '/_authenticated/classes/mes-classes'
       path: '/classes/mes-classes'
@@ -185,6 +225,8 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedClassesCreerUneClasseRoute: typeof AuthenticatedClassesCreerUneClasseRoute
   AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
+  AuthenticatedElevesCreerEleveRoute: typeof AuthenticatedElevesCreerEleveRoute
+  AuthenticatedElevesMesElevesRoute: typeof AuthenticatedElevesMesElevesRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -192,6 +234,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedClassesCreerUneClasseRoute:
     AuthenticatedClassesCreerUneClasseRoute,
   AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,
+  AuthenticatedElevesCreerEleveRoute: AuthenticatedElevesCreerEleveRoute,
+  AuthenticatedElevesMesElevesRoute: AuthenticatedElevesMesElevesRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

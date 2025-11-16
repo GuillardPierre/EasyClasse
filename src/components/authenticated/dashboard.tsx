@@ -1,10 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { InfoListCard } from './dashboard/info-list-card'
+import { RecentActivityCard } from './dashboard/recent-activity-card'
+import { StatCard } from './dashboard/stat-card'
+import type { ActivityItem } from './dashboard/recent-activity-card'
 
 const statCards = [
   {
@@ -21,21 +18,45 @@ const statCards = [
   },
 ]
 
-const recentActivities = [
+const recentActivities: Array<ActivityItem> = [
   {
     title: 'Nouvelle évaluation ajoutée',
     description: 'Evaluation de mathématiques - il y a 2h',
     color: 'bg-blue-500',
+    href: '/classes/classe-rouge',
   },
   {
     title: 'Élève inscrit',
     description: 'Marie Dupont - il y a 4h',
     color: 'bg-green-500',
+    href: '/eleves/mes-eleves',
   },
   {
     title: 'Classe créée',
     description: 'Français 6ème A - il y a 1j',
     color: 'bg-orange-500',
+    href: '/classes/classe-verte',
+  },
+]
+
+const featuredClasses = [
+  {
+    primary: 'Classe Rouge',
+    secondary: 'CM2 • 28 élèves',
+    meta: 'Dernière évaluation : 2j',
+    href: '/classes/classe-rouge',
+  },
+  {
+    primary: 'Classe Bleue',
+    secondary: 'CM1 • 26 élèves',
+    meta: 'Dernière évaluation : 4j',
+    href: '/classes/classe-bleue',
+  },
+  {
+    primary: 'Classe Verte',
+    secondary: 'CE2 • 24 élèves',
+    meta: 'Dernière évaluation : 1j',
+    href: '/classes/classe-verte',
   },
 ]
 
@@ -43,9 +64,9 @@ export function Dashboard() {
   return (
     <div className="flex min-h-full flex-col justify-center space-y-6 py-12">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Bienvenue sur votre tableau de bord ClassEasy
+        <h2>Dashboard</h2>
+        <p className="text-muted-foreground mt-0">
+          Bienvenue sur votre tableau de bord EasyClasse
         </p>
       </div>
 
@@ -56,80 +77,17 @@ export function Dashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Aperçu des Performances</CardTitle>
-            <CardDescription>
-              Graphique des performances à venir
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex h-[200px] items-center justify-center text-muted-foreground">
-              TODO : Implémenter le graphique des performances
-            </div>
-          </CardContent>
-        </Card>
-
+        {/* <PerformanceCard className="col-span-4" /> */}
+        <InfoListCard
+          className="col-span-4"
+          title="Classes favorites"
+          items={featuredClasses}
+        />
         <RecentActivityCard
           activities={recentActivities}
           className="col-span-4 md:col-span-3"
         />
       </div>
-    </div>
-  )
-}
-
-type StatCardProps = (typeof statCards)[number]
-
-function StatCard({ title, value }: StatCardProps) {
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-      </CardContent>
-    </Card>
-  )
-}
-
-type RecentActivity = (typeof recentActivities)[number]
-
-function RecentActivityCard({
-  activities,
-  className,
-}: {
-  activities: Array<RecentActivity>
-  className?: string
-}) {
-  return (
-    <div className={className}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Activités Récentes</CardTitle>
-          <CardDescription>Suivi des dernières actions</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {activities.map((activity) => (
-            <div
-              key={activity.title}
-              className="flex items-center gap-4 rounded-md border border-transparent p-2 hover:border-border"
-            >
-              <span
-                className={`h-2 w-2 rounded-full ${activity.color}`}
-                aria-hidden
-              />
-              <div className="flex-1">
-                <p className="text-sm font-medium">{activity.title}</p>
-                <p className="text-xs text-muted-foreground mt-0">
-                  {activity.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
     </div>
   )
 }

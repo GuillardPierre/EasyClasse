@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react'
 
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { CustomTable } from './CustomTable'
 import type { TableColumn, TableRowData } from './CustomTable'
 import { Button } from '@/components/ui/button'
@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 
 type PrimaryClassRow = TableRowData & {
   id: string
+  slug: string
   name: string
   level: string
   studentsCount: number
@@ -26,6 +27,7 @@ const columns: Array<TableColumn<PrimaryClassRow>> = [
 const mockClasses: Array<PrimaryClassRow> = [
   {
     id: '1',
+    slug: 'classe-rouge',
     name: 'Classe Rouge',
     level: 'CM2',
     studentsCount: 28,
@@ -34,6 +36,7 @@ const mockClasses: Array<PrimaryClassRow> = [
   },
   {
     id: '2',
+    slug: 'classe-bleue',
     name: 'Classe Bleue',
     level: 'CM1',
     studentsCount: 26,
@@ -42,6 +45,7 @@ const mockClasses: Array<PrimaryClassRow> = [
   },
   {
     id: '3',
+    slug: 'classe-verte',
     name: 'Classe Verte',
     level: 'CE2',
     studentsCount: 24,
@@ -50,6 +54,7 @@ const mockClasses: Array<PrimaryClassRow> = [
   },
   {
     id: '4',
+    slug: 'classe-jaune',
     name: 'Classe Jaune',
     level: 'CE1',
     studentsCount: 22,
@@ -59,6 +64,10 @@ const mockClasses: Array<PrimaryClassRow> = [
 ]
 
 export default function ClassList() {
+  const navigate = useNavigate()
+  const handleRowClick = (row: PrimaryClassRow) => {
+    navigate({ to: '/classes/$className', params: { className: row.slug } })
+  }
   return (
     <div className="flex min-h-[80vh] w-full items-center justify-center">
       <div className="space-y-4 w-full max-w-full md:max-w-[75%]">
@@ -67,7 +76,12 @@ export default function ClassList() {
         </div>
         <Card>
           <CardContent className="overflow-x-auto p-0">
-            <CustomTable columns={columns} rows={mockClasses} rowKey="id" />
+            <CustomTable
+              columns={columns}
+              rows={mockClasses}
+              onRowClick={handleRowClick}
+              rowKey="id"
+            />
           </CardContent>
         </Card>
         <Button asChild>

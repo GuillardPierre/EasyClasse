@@ -19,6 +19,7 @@ import { Route as AuthenticatedElevesMesElevesRouteImport } from './routes/_auth
 import { Route as AuthenticatedElevesCreerEleveRouteImport } from './routes/_authenticated/eleves/creer-eleve'
 import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
 import { Route as AuthenticatedClassesCreerUneClasseRouteImport } from './routes/_authenticated/classes/creer-une-classe'
+import { Route as AuthenticatedClassesClassNameRouteImport } from './routes/_authenticated/classes/$className'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -72,12 +73,19 @@ const AuthenticatedClassesCreerUneClasseRoute =
     path: '/classes/creer-une-classe',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedClassesClassNameRoute =
+  AuthenticatedClassesClassNameRouteImport.update({
+    id: '/classes/$className',
+    path: '/classes/$className',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/$className': typeof AuthenticatedClassesClassNameRoute
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
@@ -88,6 +96,7 @@ export interface FileRoutesByTo {
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
+  '/classes/$className': typeof AuthenticatedClassesClassNameRoute
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
@@ -101,6 +110,7 @@ export interface FileRoutesById {
   '/_public/login': typeof PublicLoginRoute
   '/_public/signup': typeof PublicSignupRoute
   '/_public/': typeof PublicIndexRoute
+  '/_authenticated/classes/$className': typeof AuthenticatedClassesClassNameRoute
   '/_authenticated/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/_authenticated/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/'
+    | '/classes/$className'
     | '/classes/creer-une-classe'
     | '/classes/mes-classes'
     | '/eleves/creer-eleve'
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/'
+    | '/classes/$className'
     | '/classes/creer-une-classe'
     | '/classes/mes-classes'
     | '/eleves/creer-eleve'
@@ -135,6 +147,7 @@ export interface FileRouteTypes {
     | '/_public/login'
     | '/_public/signup'
     | '/_public/'
+    | '/_authenticated/classes/$className'
     | '/_authenticated/classes/creer-une-classe'
     | '/_authenticated/classes/mes-classes'
     | '/_authenticated/eleves/creer-eleve'
@@ -218,11 +231,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClassesCreerUneClasseRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/classes/$className': {
+      id: '/_authenticated/classes/$className'
+      path: '/classes/$className'
+      fullPath: '/classes/$className'
+      preLoaderRoute: typeof AuthenticatedClassesClassNameRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedClassesClassNameRoute: typeof AuthenticatedClassesClassNameRoute
   AuthenticatedClassesCreerUneClasseRoute: typeof AuthenticatedClassesCreerUneClasseRoute
   AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
   AuthenticatedElevesCreerEleveRoute: typeof AuthenticatedElevesCreerEleveRoute
@@ -231,6 +252,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedClassesClassNameRoute: AuthenticatedClassesClassNameRoute,
   AuthenticatedClassesCreerUneClasseRoute:
     AuthenticatedClassesCreerUneClasseRoute,
   AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,

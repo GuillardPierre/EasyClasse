@@ -21,15 +21,17 @@ export type TableColumn<T extends TableRowData = TableRowData> = {
 }
 
 type CustomTableProps<T extends TableRowData = TableRowData> = {
-  columns: TableColumn<T>[]
-  rows: T[]
+  columns: Array<TableColumn<T>>
+  rows: Array<T>
   rowKey?: keyof T & string
+  onRowClick?: (row: T) => void
 }
 
 export function CustomTable<T extends TableRowData>({
   columns,
   rows,
   rowKey,
+  onRowClick,
 }: CustomTableProps<T>) {
   return (
     <Table>
@@ -59,8 +61,14 @@ export function CustomTable<T extends TableRowData>({
               ? rawKey
               : index
 
+          const isClickable = Boolean(onRowClick)
+
           return (
-            <TableRow key={resolvedKey}>
+            <TableRow
+              key={resolvedKey}
+              onClick={() => onRowClick?.(row)}
+              className={cn(isClickable && 'cursor-pointer hover:bg-accent/40')}
+            >
               {columns.map((column) => (
                 <TableCell
                   key={`${column.key}-${index}`}

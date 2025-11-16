@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 
 import appCss from '../styles.css?url'
 import { store } from '@/store/store'
+import { NotFound } from '@/components/not-found'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -34,6 +35,7 @@ export const Route = createRootRoute({
   }),
 
   component: RootApp,
+  notFoundComponent: () => <NotFound />,
   shellComponent: RootDocument,
 })
 

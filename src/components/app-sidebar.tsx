@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { BookOpen, Moon, Sun } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 import {
   Sidebar,
@@ -18,6 +19,8 @@ import {
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { toggleTheme } from '@/store/themeSlice'
 
 // Navigation pour ClassEasy
 const data = {
@@ -107,7 +110,9 @@ const currentUser = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [isDark, setIsDark] = React.useState(false)
+  const dispatch = useAppDispatch()
+  const mode = useAppSelector((state) => state.theme.mode)
+  const isDark = mode === 'dark'
 
   React.useEffect(() => {
     if (typeof document === 'undefined') return
@@ -115,8 +120,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }, [isDark])
 
   const handleToggleTheme = React.useCallback(() => {
-    setIsDark((prev) => !prev)
-  }, [])
+    dispatch(toggleTheme())
+  }, [dispatch])
 
   return (
     <Sidebar {...props}>
@@ -127,14 +132,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton size="lg" asChild>
-                  <a href="#">
+                  <Link to="/">
                     <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                       <BookOpen className="size-4" />
                     </div>
                     <div className="flex flex-col gap-0.5 leading-none">
                       <span className="font-medium">EasyClasse</span>
                     </div>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -161,29 +166,36 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent className="justify-center">
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
-                    {item.title}
-                  </a>
-                </SidebarMenuButton>
-                {item.items.length ? (
-                  <SidebarMenuSub>
-                    {item.items.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton
-                          asChild
-                          isActive={subItem.isActive}
-                        >
-                          <a href={subItem.url}>{subItem.title}</a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                ) : null}
-              </SidebarMenuItem>
-            ))}
+            {data.navMain.map((item) => {
+              const hasLink = item.url && item.url !== '#'
+              return (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild={hasLink}>
+                    {hasLink ? (
+                      <Link to={item.url} className="font-medium">
+                        {item.title}
+                      </Link>
+                    ) : (
+                      <span className="font-medium">{item.title}</span>
+                    )}
+                  </SidebarMenuButton>
+                  {item.items.length ? (
+                    <SidebarMenuSub>
+                      {item.items.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={subItem.isActive}
+                          >
+                            <Link to={subItem.url}>{subItem.title}</Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  ) : null}
+                </SidebarMenuItem>
+              )
+            })}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
@@ -191,8 +203,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a
-                href="/premium"
+              <Link
+                to="/premium"
                 className="flex items-center justify-between gap-2"
               >
                 <div className="flex flex-col text-left p-1">
@@ -201,13 +213,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     Débloquer l&apos;accès complet
                   </span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a
-                href={currentUser.profileUrl}
+              <Link
+                to={currentUser.profileUrl}
                 className="flex items-center gap-3"
               >
                 <Avatar className="size-9">
@@ -222,7 +234,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {currentUser.name}
                   </span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

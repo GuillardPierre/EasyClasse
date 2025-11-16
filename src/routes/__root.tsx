@@ -1,8 +1,15 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { Provider } from 'react-redux'
 
 import appCss from '../styles.css?url'
+import { store } from '@/store/store'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -26,8 +33,17 @@ export const Route = createRootRoute({
     ],
   }),
 
+  component: RootApp,
   shellComponent: RootDocument,
 })
+
+function RootApp() {
+  return (
+    <Provider store={store}>
+      <Outlet />
+    </Provider>
+  )
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (

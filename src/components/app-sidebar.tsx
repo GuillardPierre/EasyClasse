@@ -89,7 +89,7 @@ const data = {
       items: [
         {
           title: 'Profil',
-          url: '/settings/profile',
+          url: '/parametres/profil',
           isActive: false,
         },
         {

@@ -5,7 +5,10 @@ type PreniumCallToActionProps = {
   onClick: () => void
 }
 
-const PreniumCallToAction = ({ hasForm, onClick }: PreniumCallToActionProps) => {
+const PreniumCallToAction = ({
+  hasForm,
+  onClick,
+}: PreniumCallToActionProps) => {
   if (hasForm) {
     return null
   }
@@ -13,11 +16,10 @@ const PreniumCallToAction = ({ hasForm, onClick }: PreniumCallToActionProps) => 
   return (
     <div className="text-center">
       <Button size="lg" onClick={onClick}>
-        Passer au Prenium
+        Souscrire à l'abonnement prenium
       </Button>
     </div>
   )
 }
 
 export default PreniumCallToAction
-

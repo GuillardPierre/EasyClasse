@@ -1,7 +1,7 @@
 import { ClassLevelSelect } from './ClassLevelSelect'
 import { SchoolYearSelect } from './SchoolYearSelect'
 import { StudentsPicker } from './StudentsPicker'
-import { useCreateClassForm } from './useCreateClassForm'
+import { useCreateClassForm } from './hooks/useCreateClassForm'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'

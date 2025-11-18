@@ -1,8 +1,8 @@
 import { Plus } from 'lucide-react'
 
 import { Link, useNavigate } from '@tanstack/react-router'
-import { CustomTable } from './CustomTable'
-import type { TableColumn, TableRowData } from './CustomTable'
+import { CustomTable } from '../../commons/CustomTable'
+import type { TableColumn, TableRowData } from '../../commons/CustomTable'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 

@@ -92,11 +92,11 @@ const data = {
           url: '/parametres/profil',
           isActive: false,
         },
-        {
-          title: 'Préférences',
-          url: '/settings/preferences',
-          isActive: false,
-        },
+        // {
+        //   title: 'Préférences',
+        //   url: '/settings/preferences',
+        //   isActive: false,
+        // },
       ],
     },
   ],

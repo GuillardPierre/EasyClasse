@@ -1,6 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import ClassDashboard from '@/components/authenticated/class/ClassDashboard'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { getClassData } from '@/components/authenticated/class/classMockData'
 
 export const Route = createFileRoute('/_authenticated/classes/$className')({
-  component: ClassDashboard,
+  loader: ({ params }) => ({
+    classData: getClassData(params.className),
+  }),
+  component: ClassLayout,
 })
+
+function ClassLayout() {
+  return <Outlet />
+}

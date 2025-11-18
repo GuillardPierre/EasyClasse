@@ -1,121 +1,16 @@
-import { useMemo } from 'react'
-import { useParams } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 
 import { BookPlus, CalendarPlus, PlusCircle } from 'lucide-react'
+import { CustomTable } from '../../commons/CustomTable'
 
 import { PerformanceCard } from '../dashboard/performance-card'
 import { RecentActivityCard } from '../dashboard/recent-activity-card'
-import { StatCard } from '../dashboard/stat-card'
-import { ClassDashboardHeader } from './components/ClassDashboardHeader'
-import { CustomTable } from './CustomTable'
-import type { ActivityItem } from '../dashboard/recent-activity-card'
-import type { TableColumn } from './CustomTable'
+import { DashboardHeader } from './commons/ClassDashboardHeader'
+import { StatCard } from './commons/StatsCard'
+import { studentNameToSlug } from './classMockData'
+import type { ClassData } from './classMockData'
+import type { TableColumn } from '../../commons/CustomTable'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-type ClassInsight = {
-  displayName: string
-  stats: Array<{ title: string; value: string }>
-  students: Array<{
-    id: string
-    name: string
-    email: string
-    average: string
-  }>
-  activities: Array<ActivityItem>
-}
-
-const classInsights: Partial<Record<string, ClassInsight>> = {
-  'classe-rouge': {
-    displayName: 'Classe Rouge',
-    stats: [
-      { title: 'Élèves', value: '28' },
-      { title: 'Évaluations', value: '12' },
-      { title: 'Réussite moyenne', value: '96%' },
-    ],
-    students: [
-      {
-        id: 'stu-1',
-        name: 'Camille Dupuis',
-        average: '17.2',
-        email: 'camille.dupuis@example.com',
-      },
-      {
-        id: 'stu-2',
-        name: 'Jules Martin',
-        average: '15.4',
-        email: 'jules.martin@example.com',
-      },
-      {
-        id: 'stu-3',
-        name: 'Sofia Lemaire',
-        average: '14.9',
-        email: 'sofia.lemaire@example.com',
-      },
-    ],
-    activities: [
-      {
-        title: 'Évaluation de mathématiques',
-        description: 'Terminée hier',
-        color: 'bg-blue-500',
-      },
-      {
-        title: 'Projet de lecture',
-        description: 'En cours - rendu vendredi',
-        color: 'bg-purple-500',
-      },
-      {
-        title: 'Réunion parents',
-        description: 'Planifiée pour lundi prochain',
-        color: 'bg-orange-500',
-      },
-    ],
-  },
-  'classe-bleue': {
-    displayName: 'Classe Bleue',
-    stats: [
-      { title: 'Élèves', value: '26' },
-      { title: 'Évaluations', value: '9' },
-      { title: 'Réussite moyenne', value: '92%' },
-    ],
-    students: [
-      {
-        id: 'stu-4',
-        name: 'Noah Leroy',
-        average: '16.1',
-        email: 'noah.leroy@example.com',
-      },
-      {
-        id: 'stu-5',
-        name: 'Inès Robert',
-        average: '15.7',
-        email: 'ines.robert@example.com',
-      },
-      {
-        id: 'stu-6',
-        name: 'Léa Colin',
-        average: '13.8',
-        email: 'lea.colin@example.com',
-      },
-    ],
-    activities: [
-      {
-        title: 'Atelier sciences',
-        description: 'Prévu demain',
-        color: 'bg-green-500',
-      },
-      {
-        title: 'Contrôle d’histoire',
-        description: 'Corrigé envoyé aux parents',
-        color: 'bg-blue-500',
-      },
-      {
-        title: 'Sortie pédagogique',
-        description: 'Validation en attente',
-        color: 'bg-yellow-500',
-      },
-    ],
-  },
-}
 
 const studentColumns: Array<
   TableColumn<{ id: string; fullName: string; email: string; average: string }>
@@ -135,29 +30,17 @@ const studentColumns: Array<
   },
 ]
 
-export default function ClassDashboard() {
-  const { className } = useParams({
-    from: '/_authenticated/classes/$className',
-  })
+type ClassDashboardProps = {
+  classData: ClassData
+}
 
-  const classData = useMemo(() => {
-    return (
-      classInsights[className] ?? {
-        displayName: className.replace(/-/g, ' '),
-        stats: [
-          { title: 'Élèves', value: '0' },
-          { title: 'Évaluations', value: '-' },
-          { title: 'Présence moyenne', value: '-' },
-        ],
-        students: [],
-        activities: [],
-      }
-    )
-  }, [className])
+export default function ClassDashboard({ classData }: ClassDashboardProps) {
+  const navigate = useNavigate()
+  const classSlug = classData.slug
 
   return (
     <div className="flex min-h-full flex-col justify-center space-y-6 py-12">
-      <ClassDashboardHeader
+      <DashboardHeader
         title={classData.displayName}
         actions={[
           {
@@ -210,6 +93,15 @@ export default function ClassDashboard() {
               average: student.average,
             }))}
             rowKey="id"
+            onRowClick={(student) => {
+              navigate({
+                to: '/classes/$className/$studentName',
+                params: {
+                  className: classSlug,
+                  studentName: studentNameToSlug(student.fullName),
+                },
+              })
+            }}
           />
         </CardContent>
       </Card>

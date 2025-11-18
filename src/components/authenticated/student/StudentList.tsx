@@ -1,17 +1,19 @@
 import { Plus } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 import type {
   TableColumn,
   TableRowData,
-} from '@/components/authenticated/class/CustomTable'
-import { CustomTable } from '@/components/authenticated/class/CustomTable'
+} from '@/components/commons/CustomTable'
+import { CustomTable } from '@/components/commons/CustomTable'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { studentNameToSlug } from '@/components/authenticated/class/classMockData'
 
 type StudentRow = TableRowData & {
   id: string
   fullName: string
+  classSlug: string
   classLevel: string
   email: string
   status: string
@@ -28,6 +30,7 @@ const mockStudents: Array<StudentRow> = [
   {
     id: 'stu-1',
     fullName: 'Camille Dupuis',
+    classSlug: 'classe-rouge',
     classLevel: 'CM2',
     email: 'camille.dupuis@example.com',
     status: 'Actif',
@@ -35,6 +38,7 @@ const mockStudents: Array<StudentRow> = [
   {
     id: 'stu-2',
     fullName: 'Jules Martin',
+    classSlug: 'classe-rouge',
     classLevel: 'CM1',
     email: 'jules.martin@example.com',
     status: 'Actif',
@@ -42,6 +46,7 @@ const mockStudents: Array<StudentRow> = [
   {
     id: 'stu-3',
     fullName: 'Sofia Lemaire',
+    classSlug: 'classe-rouge',
     classLevel: '6ème',
     email: 'sofia.lemaire@example.com',
     status: 'Actif',
@@ -49,6 +54,7 @@ const mockStudents: Array<StudentRow> = [
   {
     id: 'stu-4',
     fullName: 'Noah Leroy',
+    classSlug: 'classe-bleue',
     classLevel: '5ème',
     email: 'noah.leroy@example.com',
     status: 'Actif',
@@ -56,6 +62,7 @@ const mockStudents: Array<StudentRow> = [
 ]
 
 export function StudentList() {
+  const navigate = useNavigate()
   return (
     <div className="flex min-h-[80vh] w-full items-center justify-center">
       <div className="w-full max-w-full space-y-4 md:max-w-[75%]">
@@ -64,7 +71,20 @@ export function StudentList() {
         </div>
         <Card>
           <CardContent className="overflow-x-auto p-0">
-            <CustomTable columns={columns} rows={mockStudents} rowKey="id" />
+            <CustomTable
+              columns={columns}
+              rows={mockStudents}
+              rowKey="id"
+              onRowClick={(student) => {
+                navigate({
+                  to: '/classes/$className/$studentName',
+                  params: {
+                    className: student.classSlug,
+                    studentName: studentNameToSlug(student.fullName),
+                  },
+                })
+              }}
+            />
           </CardContent>
         </Card>
         <Button asChild>

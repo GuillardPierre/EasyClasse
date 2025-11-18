@@ -22,6 +22,8 @@ import { Route as AuthenticatedElevesCreerEleveRouteImport } from './routes/_aut
 import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
 import { Route as AuthenticatedClassesCreerUneClasseRouteImport } from './routes/_authenticated/classes/creer-une-classe'
 import { Route as AuthenticatedClassesClassNameRouteImport } from './routes/_authenticated/classes/$className'
+import { Route as AuthenticatedClassesClassNameIndexRouteImport } from './routes/_authenticated/classes/$className/index'
+import { Route as AuthenticatedClassesClassNameStudentNameRouteImport } from './routes/_authenticated/classes/$className/$studentName'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -93,32 +95,47 @@ const AuthenticatedClassesClassNameRoute =
     path: '/classes/$className',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedClassesClassNameIndexRoute =
+  AuthenticatedClassesClassNameIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedClassesClassNameRoute,
+  } as any)
+const AuthenticatedClassesClassNameStudentNameRoute =
+  AuthenticatedClassesClassNameStudentNameRouteImport.update({
+    id: '/$studentName',
+    path: '/$studentName',
+    getParentRoute: () => AuthenticatedClassesClassNameRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
-  '/classes/$className': typeof AuthenticatedClassesClassNameRoute
+  '/classes/$className': typeof AuthenticatedClassesClassNameRouteWithChildren
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
   '/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
+  '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
+  '/classes/$className/': typeof AuthenticatedClassesClassNameIndexRoute
 }
 export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/login': typeof PublicLoginRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
-  '/classes/$className': typeof AuthenticatedClassesClassNameRoute
   '/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
   '/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
+  '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
+  '/classes/$className': typeof AuthenticatedClassesClassNameIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,13 +145,15 @@ export interface FileRoutesById {
   '/_public/login': typeof PublicLoginRoute
   '/_public/signup': typeof PublicSignupRoute
   '/_public/': typeof PublicIndexRoute
-  '/_authenticated/classes/$className': typeof AuthenticatedClassesClassNameRoute
+  '/_authenticated/classes/$className': typeof AuthenticatedClassesClassNameRouteWithChildren
   '/_authenticated/classes/creer-une-classe': typeof AuthenticatedClassesCreerUneClasseRoute
   '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/_authenticated/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/_authenticated/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
   '/_authenticated/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/_authenticated/parametres/profil': typeof AuthenticatedParametresProfilRoute
+  '/_authenticated/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
+  '/_authenticated/classes/$className/': typeof AuthenticatedClassesClassNameIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,19 +169,22 @@ export interface FileRouteTypes {
     | '/eleves/mes-eleves'
     | '/parametres/abonnement'
     | '/parametres/profil'
+    | '/classes/$className/$studentName'
+    | '/classes/$className/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
     | '/login'
     | '/signup'
     | '/'
-    | '/classes/$className'
     | '/classes/creer-une-classe'
     | '/classes/mes-classes'
     | '/eleves/creer-eleve'
     | '/eleves/mes-eleves'
     | '/parametres/abonnement'
     | '/parametres/profil'
+    | '/classes/$className/$studentName'
+    | '/classes/$className'
   id:
     | '__root__'
     | '/_authenticated'
@@ -178,6 +200,8 @@ export interface FileRouteTypes {
     | '/_authenticated/eleves/mes-eleves'
     | '/_authenticated/parametres/abonnement'
     | '/_authenticated/parametres/profil'
+    | '/_authenticated/classes/$className/$studentName'
+    | '/_authenticated/classes/$className/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -278,12 +302,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClassesClassNameRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/classes/$className/': {
+      id: '/_authenticated/classes/$className/'
+      path: '/'
+      fullPath: '/classes/$className/'
+      preLoaderRoute: typeof AuthenticatedClassesClassNameIndexRouteImport
+      parentRoute: typeof AuthenticatedClassesClassNameRoute
+    }
+    '/_authenticated/classes/$className/$studentName': {
+      id: '/_authenticated/classes/$className/$studentName'
+      path: '/$studentName'
+      fullPath: '/classes/$className/$studentName'
+      preLoaderRoute: typeof AuthenticatedClassesClassNameStudentNameRouteImport
+      parentRoute: typeof AuthenticatedClassesClassNameRoute
+    }
   }
 }
 
+interface AuthenticatedClassesClassNameRouteChildren {
+  AuthenticatedClassesClassNameStudentNameRoute: typeof AuthenticatedClassesClassNameStudentNameRoute
+  AuthenticatedClassesClassNameIndexRoute: typeof AuthenticatedClassesClassNameIndexRoute
+}
+
+const AuthenticatedClassesClassNameRouteChildren: AuthenticatedClassesClassNameRouteChildren =
+  {
+    AuthenticatedClassesClassNameStudentNameRoute:
+      AuthenticatedClassesClassNameStudentNameRoute,
+    AuthenticatedClassesClassNameIndexRoute:
+      AuthenticatedClassesClassNameIndexRoute,
+  }
+
+const AuthenticatedClassesClassNameRouteWithChildren =
+  AuthenticatedClassesClassNameRoute._addFileChildren(
+    AuthenticatedClassesClassNameRouteChildren,
+  )
+
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedClassesClassNameRoute: typeof AuthenticatedClassesClassNameRoute
+  AuthenticatedClassesClassNameRoute: typeof AuthenticatedClassesClassNameRouteWithChildren
   AuthenticatedClassesCreerUneClasseRoute: typeof AuthenticatedClassesCreerUneClasseRoute
   AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
   AuthenticatedElevesCreerEleveRoute: typeof AuthenticatedElevesCreerEleveRoute
@@ -294,7 +350,8 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedClassesClassNameRoute: AuthenticatedClassesClassNameRoute,
+  AuthenticatedClassesClassNameRoute:
+    AuthenticatedClassesClassNameRouteWithChildren,
   AuthenticatedClassesCreerUneClasseRoute:
     AuthenticatedClassesCreerUneClasseRoute,
   AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,

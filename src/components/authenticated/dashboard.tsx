@@ -1,6 +1,6 @@
 import { InfoListCard } from './dashboard/info-list-card'
 import { RecentActivityCard } from './dashboard/recent-activity-card'
-import { StatCard } from './dashboard/stat-card'
+import { StatCard } from './class/commons/StatsCard'
 import type { ActivityItem } from './dashboard/recent-activity-card'
 
 const statCards = [

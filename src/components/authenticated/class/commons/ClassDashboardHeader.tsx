@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
-type ClassDashboardHeaderProps = {
+type CustomDashboardHeaderProps = {
   title: string
   subtitle?: string
   actions?: Array<{
@@ -14,11 +14,11 @@ type ClassDashboardHeaderProps = {
   }>
 }
 
-export function ClassDashboardHeader({
+export function DashboardHeader({
   title,
   subtitle,
   actions = [],
-}: ClassDashboardHeaderProps) {
+}: CustomDashboardHeaderProps) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>

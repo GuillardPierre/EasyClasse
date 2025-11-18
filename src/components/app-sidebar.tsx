@@ -204,11 +204,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link
-                to="/premium"
+                to="/parametres/abonnement"
                 className="flex items-center justify-between gap-2 py-5"
               >
                 <div className="flex flex-col text-left p-1">
-                  <span className="text-sm font-medium">Passer en Premium</span>
+                  <span className="text-sm font-medium">Prenium</span>
                   <span className="text-xs text-muted-foreground">
                     Débloquer l&apos;accès complet
                   </span>
@@ -218,10 +218,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link
-                to={currentUser.profileUrl}
-                className="flex items-center gap-3"
-              >
+              <Link to="/parametres/profil" className="flex items-center gap-3">
                 <Avatar className="size-9">
                   <AvatarImage
                     src={currentUser.avatarUrl}

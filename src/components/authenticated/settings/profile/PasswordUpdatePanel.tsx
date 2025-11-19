@@ -1,5 +1,5 @@
 import { KeyRound } from 'lucide-react'
-import { formatDate } from './utils'
+import { formatDate } from '@/lib/utils'
 import { usePasswordUpdatePanel } from './usePasswordUpdatePanel'
 import type { PasswordFormValues } from './types'
 
@@ -44,7 +44,8 @@ export default function PasswordUpdatePanel({
           <div>
             <CardTitle>Mot de passe</CardTitle>
             <CardDescription>
-              Dernière mise à jour le {formatDate(lastUpdated)}
+              Dernière mise à jour le{' '}
+              {formatDate(lastUpdated, { month: 'long' })}
             </CardDescription>
           </div>
           <Badge variant="outline" className="gap-2 text-xs font-semibold">

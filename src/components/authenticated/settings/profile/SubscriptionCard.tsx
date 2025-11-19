@@ -1,6 +1,6 @@
 import { CalendarDays } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
-import { formatDate } from './utils'
+import { formatDate } from '@/lib/utils'
 import type { MockUserProfile } from './types'
 import { Button } from '@/components/ui/button'
 import {
@@ -37,7 +37,7 @@ export default function SubscriptionCard({ user }: SubscriptionCardProps) {
         <div className="space-y-2 text-sm text-muted-foreground">
           <p className="flex items-center gap-2">
             <CalendarDays className="size-4" aria-hidden />
-            Renouvellement le {formatDate(user.renewDate)}
+            Renouvellement le {formatDate(user.renewDate, { month: 'long' })}
           </p>
         </div>
         <div className="flex flex-wrap gap-3 pt-1">

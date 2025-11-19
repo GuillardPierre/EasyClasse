@@ -1,5 +1,5 @@
 import { CalendarDays, ShieldAlert, ShieldCheck } from 'lucide-react'
-import { formatDate } from './utils'
+import { formatDate } from '@/lib/utils'
 import type { MockUserProfile } from './types'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -33,7 +33,8 @@ export default function ProfileOverview({ user }: ProfileOverviewProps) {
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
               <span className="inline-flex items-center gap-1">
                 <CalendarDays className="size-4" aria-hidden />
-                Membre depuis le {formatDate(user.memberSince)}
+                Membre depuis le{' '}
+                {formatDate(user.memberSince, { month: 'long' })}
               </span>
               <Separator
                 orientation="vertical"

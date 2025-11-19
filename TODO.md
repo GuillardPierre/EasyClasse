@@ -12,4 +12,8 @@
 ## Idées à implémenter plus tard
 
 - Comparer un élève par rapport à la moyenne de la classe
-- Ajouter un gestionnaire de collège et d'école
+- Ajouter un gestionnaire de collège et d'école pour directeur
+- Ajouter une feuille d'appel qui pourrait être envoyé / exporté
+- Ajouter la création/gestion d'événement pour l'école, la classe, les élèves
+- Ajouter la possibilité de répondre à des QCM après une évaluation
+- Ajouter la possiblité d'envoyer un mail pour avertir les parents lors de l'ajout d'un élément pour un élève

@@ -9,7 +9,7 @@ export function InfoRow({ label, value }: InfoRowProps) {
       <p className="text-xs uppercase tracking-wide text-muted-foreground">
         {label}
       </p>
-      <p className="break-all text-sm font-medium text-foreground">
+      <p className="break-all text-sm font-medium text-foreground mt-0">
         {value ?? '—'}
       </p>
     </div>

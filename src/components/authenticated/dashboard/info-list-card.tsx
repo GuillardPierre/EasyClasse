@@ -34,7 +34,7 @@ export function InfoListCard({
         <CardTitle>{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-2">
         {items.map((item) => (
           <InfoListRow key={item.primary + (item.secondary ?? '')} {...item} />
         ))}

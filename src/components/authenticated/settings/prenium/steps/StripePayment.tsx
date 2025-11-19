@@ -23,7 +23,7 @@ const planDetails: Record<
     price: '4 € / mois',
     description:
       'Accès complet avec facturation mensuelle, annulable à tout moment.',
-    note: 'Idéal pour tester les fonctionnalités prenium.',
+    note: 'Idéal pour tester les fonctionnalités premium.',
   },
   yearly: {
     price: '30 € / an',
@@ -62,7 +62,7 @@ export const StripePayment = ({
               Formule sélectionnée
             </p>
             <p className="text-lg font-semibold">
-              Prenium {billingCycle === 'monthly' ? 'Mensuel' : 'Annuel'}
+              premium {billingCycle === 'monthly' ? 'Mensuel' : 'Annuel'}
             </p>
           </div>
           <Badge variant="secondary" className="text-base font-semibold">

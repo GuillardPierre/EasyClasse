@@ -78,7 +78,7 @@ export const PreniumWizard = ({
     <div className="pt-4">
       <CustomCard
         title="Souscrivez en quelques minutes"
-        description="Complétez vos informations, sécurisez votre paiement et activez votre espace Prenium."
+        description="Complétez vos informations, sécurisez votre paiement et activez votre espace premium."
       >
         <div className="space-y-8">
           <ol className="grid gap-4 md:grid-cols-3">

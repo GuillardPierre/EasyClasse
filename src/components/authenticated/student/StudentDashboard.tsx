@@ -1,7 +1,15 @@
-import { BookPlus, PlusCircle } from 'lucide-react'
+import { BookPlus, CalendarPlus, PlusCircle } from 'lucide-react'
 
 import { DashboardHeader } from '../class/commons/ClassDashboardHeader'
 import { StatCard } from '../class/commons/StatsCard'
+import { AssessmentTable } from './components/AssessmentTable'
+import { BehaviorTimeline } from './components/BehaviorTimeline'
+import { CommentDialog } from './components/CommentDialog'
+import { CommentsList } from './components/CommentsList'
+import { EventDialog } from './components/EventDialog'
+import { StudentOverviewCard } from './components/StudentOverviewCard'
+import { useStudentComments } from './hooks/useStudentComments'
+import { useStudentEvents } from './hooks/useStudentEvents'
 import type {
   ClassData,
   ClassStudent,
@@ -14,12 +22,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-
-import { AssessmentTable } from './components/AssessmentTable'
-import { BehaviorTimeline } from './components/BehaviorTimeline'
-import { CommentsList } from './components/CommentsList'
-import { StudentOverviewCard } from './components/StudentOverviewCard'
 
 type StudentDashboardProps = {
   classData: ClassData
@@ -65,15 +69,35 @@ export default function StudentDashboard({
   const studentStats = [
     {
       title: 'Moyenne générale',
-      value: `${student.average ?? '—'}/20`,
+      value: `${student.average ? student.average : '—'}/20`,
       description: 'Évolution sur les évaluations enregistrées',
     },
     {
       title: 'Absences',
-      value: student.attendance.absentCount ?? 0,
+      value: student.attendance.absentCount
+        ? student.attendance.absentCount
+        : 0,
       description: `${student.attendance.totalClasses} cours suivis`,
     },
   ]
+
+  const {
+    comments,
+    openCreateDialog: openCommentDialog,
+    openEditDialog: openEditCommentDialog,
+    dialog: commentDialog,
+  } = useStudentComments({
+    initialComments: student.comments,
+  })
+
+  const {
+    events,
+    openCreateDialog: openEventDialog,
+    openEditDialog: openEditEventDialog,
+    dialog: eventDialog,
+  } = useStudentEvents({
+    initialEvents: student.events,
+  })
 
   return (
     <div className="flex min-h-full flex-col space-y-6 py-12">
@@ -82,23 +106,28 @@ export default function StudentDashboard({
         subtitle={classData.displayName}
         actions={[
           {
-            label: 'Ajouter un commentaire',
-            href: '/eleves/creer-eleve',
-            icon: PlusCircle,
-          },
-          {
             label: 'Ajouter une évaluation',
             href: '/eleves/creer-eleve',
             icon: BookPlus,
             variant: 'outline',
           },
-          {
-            label: 'Ajouter un évènement',
-            href: '/eleves/creer-eleve',
-            icon: BookPlus,
-            variant: 'outline',
-          },
         ]}
+        customActions={
+          <>
+            <Button onClick={openCommentDialog} className="gap-2">
+              <PlusCircle className="size-4" />
+              Ajouter un commentaire
+            </Button>
+            <Button
+              variant="outline"
+              onClick={openEventDialog}
+              className="gap-2"
+            >
+              <CalendarPlus className="size-4" />
+              Ajouter un évènement
+            </Button>
+          </>
+        }
       />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -110,16 +139,21 @@ export default function StudentDashboard({
 
       <div className="grid gap-4 lg:grid-cols-3">
         <BehaviorTimeline
-          items={student.behaviorLog}
+          items={events}
+          onEdit={openEditEventDialog}
           className="lg:col-span-2 max-h-[400px] overflow-y-auto"
         />
         <CommentsList
-          items={student.comments}
+          items={comments}
+          onEdit={openEditCommentDialog}
           className="max-h-[400px] overflow-y-auto"
         />
       </div>
 
       <AssessmentTable assessments={student.assessments} />
+
+      <CommentDialog studentName={studentDisplayName} dialog={commentDialog} />
+      <EventDialog studentName={studentDisplayName} dialog={eventDialog} />
     </div>
   )
 }

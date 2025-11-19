@@ -1,7 +1,6 @@
+import { InfoRow } from './InfoRow'
 import type { ClassStudent } from '@/components/authenticated/class/classMockData'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-import { InfoRow } from './InfoRow'
 
 type StudentOverviewCardProps = {
   student: ClassStudent
@@ -15,11 +14,16 @@ export function StudentOverviewCard({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>Résumé de l&apos;élève</CardTitle>
+        <CardTitle>Contacts de l&apos;élève</CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-4 sm:grid-cols-2">
-        <InfoRow label="Email" value={student.email} />
-        <InfoRow label="Identifiant" value={student.id} />
+      <CardContent className="space-y-2">
+        {student.contacts.map((contact) => (
+          <InfoRow
+            key={contact.id}
+            label={contact.name}
+            value={`${contact.relation} - ${contact.phone} - ${contact.email}`}
+          />
+        ))}
       </CardContent>
     </Card>
   )

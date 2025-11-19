@@ -70,7 +70,7 @@ export const UserInfoForm = ({ data, onChange, onNext }: UserInfoFormProps) => {
         />
         <span>
           J’atteste que ces informations sont correctes et j’autorise ClassEasy
-          à me contacter pour finaliser l’abonnement Prenium.
+          à me contacter pour finaliser l’abonnement premium.
         </span>
       </label>
 

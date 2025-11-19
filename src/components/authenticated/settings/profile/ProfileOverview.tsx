@@ -61,7 +61,7 @@ export default function ProfileOverview({ user }: ProfileOverviewProps) {
           variant={user.isPremium ? 'default' : 'secondary'}
           className="px-4 py-1 text-sm"
         >
-          {user.isPremium ? 'Utilisateur Prenium' : 'Offre gratuite'}
+          {user.isPremium ? 'Utilisateur premium' : 'Offre gratuite'}
         </Badge>
       </CardHeader>
     </Card>

@@ -16,7 +16,7 @@ const PreniumCallToAction = ({
   return (
     <div className="text-center">
       <Button size="lg" onClick={onClick}>
-        Souscrire à l'abonnement prenium
+        Souscrire à l'abonnement premium
       </Button>
     </div>
   )

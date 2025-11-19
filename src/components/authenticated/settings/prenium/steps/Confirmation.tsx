@@ -22,11 +22,11 @@ export const Confirmation = ({
         <CheckCircle2 className="h-12 w-12 text-green-500" />
         <div className="space-y-1">
           <h3 className="text-xl font-semibold">
-            Merci d'avoir souscrit à l'abonnement prenium
+            Merci d'avoir souscrit à l'abonnement premium
           </h3>
           <p className="text-sm text-muted-foreground">
             Votre abonnement {cycleLabel.toLowerCase()} est actif. Vous pouvez
-            dès maintenant profiter de toutes les fonctionnalités prenium.
+            dès maintenant profiter de toutes les fonctionnalités premium.
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export const Confirmation = ({
           </div>
           <div>
             <p className="text-xs uppercase text-muted-foreground">Formule</p>
-            <p className="font-medium">Prenium {cycleLabel}</p>
+            <p className="font-medium">premium {cycleLabel}</p>
           </div>
         </div>
       </div>

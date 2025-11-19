@@ -29,7 +29,7 @@ export default function SubscriptionCard({ user }: SubscriptionCardProps) {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-lg font-semibold">
-              {user.isPremium ? 'Prenium' : 'Plan gratuit'}
+              {user.isPremium ? 'premium' : 'Plan gratuit'}
             </p>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function SubscriptionCard({ user }: SubscriptionCardProps) {
 
           <Button asChild className="flex-1">
             <Link to="/parametres/abonnement">
-              {user.isPremium ? 'Gérer mon abonnement' : 'Devenir prenium'}
+              {user.isPremium ? 'Gérer mon abonnement' : 'Devenir premium'}
             </Link>
           </Button>
         </div>

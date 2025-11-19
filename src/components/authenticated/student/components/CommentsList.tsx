@@ -1,5 +1,9 @@
+import { Edit3 } from 'lucide-react'
+
+import { EmptyState } from './EmptyState'
 import type { ClassStudent } from '@/components/authenticated/class/classMockData'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -8,27 +12,28 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-import { EmptyState } from './EmptyState'
 import { formatDate } from '@/lib/utils'
 
 type CommentsListProps = {
   items: ClassStudent['comments']
   className?: string
+  onEdit?: (comment: ClassStudent['comments'][number]) => void
 }
 
-export function CommentsList({ items, className }: CommentsListProps) {
+export function CommentsList({ items, className, onEdit }: CommentsListProps) {
   const commentMeta: Record<
     ClassStudent['comments'][number]['type'],
     { label: string; variant: 'secondary' | 'outline' }
   > = {
     comportement: { label: 'Comportement', variant: 'secondary' },
     suivi: { label: 'Suivi pédagogique', variant: 'outline' },
+    autre: { label: 'Autre', variant: 'outline' },
   }
 
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>Commentaires de l'élèves</CardTitle>
+        <CardTitle>Commentaires de l'élève</CardTitle>
         <CardDescription>
           Commentaires partagés par les enseignants de l'élève
         </CardDescription>
@@ -47,9 +52,23 @@ export function CommentsList({ items, className }: CommentsListProps) {
                 <Badge variant={commentMeta[comment.type].variant}>
                   {commentMeta[comment.type].label}
                 </Badge>
-                <span className="text-xs text-muted-foreground">
-                  {formatDate(comment.date)}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-muted-foreground">
+                    {formatDate(comment.date)}
+                  </span>
+                  {onEdit ? (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-sm"
+                      className="text-muted-foreground hover:text-foreground"
+                      onClick={() => onEdit(comment)}
+                      aria-label="Modifier le commentaire"
+                    >
+                      <Edit3 className="size-4" />
+                    </Button>
+                  ) : null}
+                </div>
               </div>
               <p className="text-sm text-foreground mb-0">{comment.content}</p>
               <p className="text-xs text-muted-foreground mt-0">

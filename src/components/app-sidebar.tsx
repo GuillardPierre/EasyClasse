@@ -208,7 +208,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 className="flex items-center justify-between gap-2 py-5"
               >
                 <div className="flex flex-col text-left p-1">
-                  <span className="text-sm font-medium">Prenium</span>
+                  <span className="text-sm font-medium">Premium</span>
                   <span className="text-xs text-muted-foreground">
                     Débloquer l&apos;accès complet
                   </span>

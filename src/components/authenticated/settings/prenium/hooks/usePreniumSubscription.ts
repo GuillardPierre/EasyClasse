@@ -24,7 +24,7 @@ const wizardSteps: Array<{ key: Step; label: string; helper: string }> = [
   {
     key: 'confirmation',
     label: 'Confirmation',
-    helper: 'Accédez immédiatement au Prenium',
+    helper: 'Accédez immédiatement au premium',
   },
 ]
 

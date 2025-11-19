@@ -81,6 +81,7 @@ export function Dashboard() {
         <InfoListCard
           className="col-span-4"
           title="Classes favorites"
+          description="Ajoute des classes favorites pour y accéder rapidement"
           items={featuredClasses}
         />
         <RecentActivityCard

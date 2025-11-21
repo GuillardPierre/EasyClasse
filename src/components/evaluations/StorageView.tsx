@@ -1,10 +1,10 @@
-import { AddEvaluationDialog } from './AddEvaluationDialog'
-import { ChevronRight, Home } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useFileSystem } from '@/hooks/use-file-system'
-import { Separator } from '@/components/ui/separator'
 import { FileSystemList } from './FileSystemList'
 import { CreateFolderDialog } from './CreateFolderDialog'
+import { AddEvaluationDialog } from './AddEvaluationDialog'
+import { Button } from '@/components/ui/button'
+import { ChevronRight, Home } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
 
 export function StorageView() {
   const {
@@ -13,14 +13,16 @@ export function StorageView() {
     currentItems,
     createFolder,
     uploadFile,
-    navigateToFolder,
+    navigateToFolder
   } = useFileSystem()
+
+
 
   const handleAddEvaluation = (evaluation: any) => {
     console.log('New evaluation:', evaluation)
     uploadFile(evaluation.file, {
       gradingType: evaluation.gradingType,
-      classIds: evaluation.classIds,
+      classIds: evaluation.classIds
     })
   }
 
@@ -35,6 +37,7 @@ export function StorageView() {
             <p className="text-muted-foreground">
               Gérez vos évaluations et organisez-les dans des dossiers.
             </p>
+            
           </div>
           <div className="flex items-center gap-2">
             <CreateFolderDialog onCreate={createFolder} />
@@ -52,15 +55,15 @@ export function StorageView() {
           >
             <Home className="h-4 w-4" />
           </Button>
-
+          
           {(() => {
             const path = []
-            let current = folders.find((f) => f.id === currentFolderId)
+            let current = folders.find(f => f.id === currentFolderId)
             while (current) {
               path.unshift(current)
-              current = folders.find((f) => f.id === current?.parentId)
+              current = folders.find(f => f.id === current?.parentId)
             }
-
+            
             return path.map((folder, index) => (
               <div key={folder.id} className="flex items-center gap-2">
                 <ChevronRight className="h-4 w-4" />
@@ -68,9 +71,7 @@ export function StorageView() {
                   variant="ghost"
                   size="sm"
                   className={`h-auto p-0 hover:bg-transparent hover:text-foreground ${
-                    index === path.length - 1
-                      ? 'font-medium text-foreground'
-                      : ''
+                    index === path.length - 1 ? "font-medium text-foreground" : ""
                   }`}
                   onClick={() => navigateToFolder(folder.id)}
                 >
@@ -86,7 +87,7 @@ export function StorageView() {
 
       <div className="grid gap-6">
         {/* <UploadArea onUpload={uploadFile} /> */}
-
+        
         <div className="flex flex-col gap-4">
           <FileSystemList
             folders={currentItems.folders}

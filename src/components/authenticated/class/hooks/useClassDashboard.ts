@@ -58,7 +58,7 @@ export function useClassDashboard({ classData }: UseClassDashboardProps) {
       },
       {
         label: 'Nouvelle évaluation',
-        href: '/assessments/new',
+        href: `/classes/${classData.slug}/evaluation`,
         variant: 'outline' as const,
         icon: BookPlus,
       },

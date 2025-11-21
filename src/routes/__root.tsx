@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import appCss from '../styles.css?url'
 import { store } from '@/store/store'
 import { NotFound } from '@/components/not-found'
+import { FileSystemProvider } from '@/contexts/FileSystemContext'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -42,7 +43,9 @@ export const Route = createRootRoute({
 function RootApp() {
   return (
     <Provider store={store}>
-      <Outlet />
+      <FileSystemProvider>
+        <Outlet />
+      </FileSystemProvider>
     </Provider>
   )
 }

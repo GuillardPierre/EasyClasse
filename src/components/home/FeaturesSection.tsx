@@ -5,7 +5,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_props, ref) => {
   const features = [
     {
       title: "Un outil pour suivre l'évolution de vos élèves",
-      image: './images/enseignants.jpg',
+      image: './classes/$nom-de-classe/$studentName images/enseignants.jpg',
       imagePosition: 'right',
       content: (
         <p>

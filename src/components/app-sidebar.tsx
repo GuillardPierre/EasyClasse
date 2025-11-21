@@ -72,15 +72,11 @@ const data = {
       url: '#',
       items: [
         {
-          title: 'Enregistrer une évaluation',
+          title: 'Ajouter une évaluation',
           url: '/evaluations/enregistrer',
           isActive: false,
         },
-        {
-          title: 'Modèles',
-          url: '/assessments/templates',
-          isActive: false,
-        },
+
       ],
     },
     {

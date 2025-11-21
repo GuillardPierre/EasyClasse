@@ -25,6 +25,8 @@ import { Route as AuthenticatedClassesCreerUneClasseRouteImport } from './routes
 import { Route as AuthenticatedClassesClassNameRouteImport } from './routes/_authenticated/classes/$className'
 import { Route as AuthenticatedClassesClassNameIndexRouteImport } from './routes/_authenticated/classes/$className/index'
 import { Route as AuthenticatedClassesClassNameStudentNameRouteImport } from './routes/_authenticated/classes/$className/$studentName'
+import { Route as AuthenticatedClassesClassNameEvaluationIndexRouteImport } from './routes/_authenticated/classes/$className/evaluation/index'
+import { Route as AuthenticatedClassesClassNameEvaluationEvaluationNameRouteImport } from './routes/_authenticated/classes/$className/evaluation/$evaluationName'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -114,6 +116,18 @@ const AuthenticatedClassesClassNameStudentNameRoute =
     path: '/$studentName',
     getParentRoute: () => AuthenticatedClassesClassNameRoute,
   } as any)
+const AuthenticatedClassesClassNameEvaluationIndexRoute =
+  AuthenticatedClassesClassNameEvaluationIndexRouteImport.update({
+    id: '/evaluation/',
+    path: '/evaluation/',
+    getParentRoute: () => AuthenticatedClassesClassNameRoute,
+  } as any)
+const AuthenticatedClassesClassNameEvaluationEvaluationNameRoute =
+  AuthenticatedClassesClassNameEvaluationEvaluationNameRouteImport.update({
+    id: '/evaluation/$evaluationName',
+    path: '/evaluation/$evaluationName',
+    getParentRoute: () => AuthenticatedClassesClassNameRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -130,6 +144,8 @@ export interface FileRoutesByFullPath {
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
   '/classes/$className/': typeof AuthenticatedClassesClassNameIndexRoute
+  '/classes/$className/evaluation/$evaluationName': typeof AuthenticatedClassesClassNameEvaluationEvaluationNameRoute
+  '/classes/$className/evaluation': typeof AuthenticatedClassesClassNameEvaluationIndexRoute
 }
 export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -145,6 +161,8 @@ export interface FileRoutesByTo {
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
   '/classes/$className': typeof AuthenticatedClassesClassNameIndexRoute
+  '/classes/$className/evaluation/$evaluationName': typeof AuthenticatedClassesClassNameEvaluationEvaluationNameRoute
+  '/classes/$className/evaluation': typeof AuthenticatedClassesClassNameEvaluationIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -164,6 +182,8 @@ export interface FileRoutesById {
   '/_authenticated/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/_authenticated/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
   '/_authenticated/classes/$className/': typeof AuthenticatedClassesClassNameIndexRoute
+  '/_authenticated/classes/$className/evaluation/$evaluationName': typeof AuthenticatedClassesClassNameEvaluationEvaluationNameRoute
+  '/_authenticated/classes/$className/evaluation/': typeof AuthenticatedClassesClassNameEvaluationIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -182,6 +202,8 @@ export interface FileRouteTypes {
     | '/parametres/profil'
     | '/classes/$className/$studentName'
     | '/classes/$className/'
+    | '/classes/$className/evaluation/$evaluationName'
+    | '/classes/$className/evaluation'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/dashboard'
@@ -197,6 +219,8 @@ export interface FileRouteTypes {
     | '/parametres/profil'
     | '/classes/$className/$studentName'
     | '/classes/$className'
+    | '/classes/$className/evaluation/$evaluationName'
+    | '/classes/$className/evaluation'
   id:
     | '__root__'
     | '/_authenticated'
@@ -215,6 +239,8 @@ export interface FileRouteTypes {
     | '/_authenticated/parametres/profil'
     | '/_authenticated/classes/$className/$studentName'
     | '/_authenticated/classes/$className/'
+    | '/_authenticated/classes/$className/evaluation/$evaluationName'
+    | '/_authenticated/classes/$className/evaluation/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -336,12 +362,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClassesClassNameStudentNameRouteImport
       parentRoute: typeof AuthenticatedClassesClassNameRoute
     }
+    '/_authenticated/classes/$className/evaluation/': {
+      id: '/_authenticated/classes/$className/evaluation/'
+      path: '/evaluation'
+      fullPath: '/classes/$className/evaluation'
+      preLoaderRoute: typeof AuthenticatedClassesClassNameEvaluationIndexRouteImport
+      parentRoute: typeof AuthenticatedClassesClassNameRoute
+    }
+    '/_authenticated/classes/$className/evaluation/$evaluationName': {
+      id: '/_authenticated/classes/$className/evaluation/$evaluationName'
+      path: '/evaluation/$evaluationName'
+      fullPath: '/classes/$className/evaluation/$evaluationName'
+      preLoaderRoute: typeof AuthenticatedClassesClassNameEvaluationEvaluationNameRouteImport
+      parentRoute: typeof AuthenticatedClassesClassNameRoute
+    }
   }
 }
 
 interface AuthenticatedClassesClassNameRouteChildren {
   AuthenticatedClassesClassNameStudentNameRoute: typeof AuthenticatedClassesClassNameStudentNameRoute
   AuthenticatedClassesClassNameIndexRoute: typeof AuthenticatedClassesClassNameIndexRoute
+  AuthenticatedClassesClassNameEvaluationEvaluationNameRoute: typeof AuthenticatedClassesClassNameEvaluationEvaluationNameRoute
+  AuthenticatedClassesClassNameEvaluationIndexRoute: typeof AuthenticatedClassesClassNameEvaluationIndexRoute
 }
 
 const AuthenticatedClassesClassNameRouteChildren: AuthenticatedClassesClassNameRouteChildren =
@@ -350,6 +392,10 @@ const AuthenticatedClassesClassNameRouteChildren: AuthenticatedClassesClassNameR
       AuthenticatedClassesClassNameStudentNameRoute,
     AuthenticatedClassesClassNameIndexRoute:
       AuthenticatedClassesClassNameIndexRoute,
+    AuthenticatedClassesClassNameEvaluationEvaluationNameRoute:
+      AuthenticatedClassesClassNameEvaluationEvaluationNameRoute,
+    AuthenticatedClassesClassNameEvaluationIndexRoute:
+      AuthenticatedClassesClassNameEvaluationIndexRoute,
   }
 
 const AuthenticatedClassesClassNameRouteWithChildren =

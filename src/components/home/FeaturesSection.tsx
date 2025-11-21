@@ -5,7 +5,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_props, ref) => {
   const features = [
     {
       title: "Un outil pour suivre l'évolution de vos élèves",
-      image: './public/images/enseignants.jpg',
+      image: './images/enseignants.jpg',
       imagePosition: 'right',
       content: (
         <p>
@@ -18,7 +18,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_props, ref) => {
     {
       title:
         'Enregistrez vos classes et commencez à enregistrer les notes et résultats de vos élèves',
-      image: './public/images/classe.jpg',
+      image: './images/classe.jpg',
       imagePosition: 'left',
       content: (
         <p>
@@ -28,7 +28,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_props, ref) => {
     },
     {
       title: "Remplissez plus facilement les livrets de fin d'année",
-      image: './public/images/correction.jpg',
+      image: './images/correction.jpg',
       imagePosition: 'right',
       content: (
         <p>

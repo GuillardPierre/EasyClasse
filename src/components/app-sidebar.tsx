@@ -72,8 +72,8 @@ const data = {
       url: '#',
       items: [
         {
-          title: 'Créer une Évaluation',
-          url: '/assessments/new',
+          title: 'Enregistrer une évaluation',
+          url: '/evaluations/enregistrer',
           isActive: false,
         },
         {

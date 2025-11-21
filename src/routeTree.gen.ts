@@ -17,6 +17,7 @@ import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedParametresProfilRouteImport } from './routes/_authenticated/parametres/profil'
 import { Route as AuthenticatedParametresAbonnementRouteImport } from './routes/_authenticated/parametres/abonnement'
+import { Route as AuthenticatedEvaluationsEnregistrerRouteImport } from './routes/_authenticated/evaluations/enregistrer'
 import { Route as AuthenticatedElevesMesElevesRouteImport } from './routes/_authenticated/eleves/mes-eleves'
 import { Route as AuthenticatedElevesCreerEleveRouteImport } from './routes/_authenticated/eleves/creer-eleve'
 import { Route as AuthenticatedClassesMesClassesRouteImport } from './routes/_authenticated/classes/mes-classes'
@@ -63,6 +64,12 @@ const AuthenticatedParametresAbonnementRoute =
   AuthenticatedParametresAbonnementRouteImport.update({
     id: '/parametres/abonnement',
     path: '/parametres/abonnement',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedEvaluationsEnregistrerRoute =
+  AuthenticatedEvaluationsEnregistrerRouteImport.update({
+    id: '/evaluations/enregistrer',
+    path: '/evaluations/enregistrer',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedElevesMesElevesRoute =
@@ -118,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
+  '/evaluations/enregistrer': typeof AuthenticatedEvaluationsEnregistrerRoute
   '/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
@@ -132,6 +140,7 @@ export interface FileRoutesByTo {
   '/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
+  '/evaluations/enregistrer': typeof AuthenticatedEvaluationsEnregistrerRoute
   '/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
@@ -150,6 +159,7 @@ export interface FileRoutesById {
   '/_authenticated/classes/mes-classes': typeof AuthenticatedClassesMesClassesRoute
   '/_authenticated/eleves/creer-eleve': typeof AuthenticatedElevesCreerEleveRoute
   '/_authenticated/eleves/mes-eleves': typeof AuthenticatedElevesMesElevesRoute
+  '/_authenticated/evaluations/enregistrer': typeof AuthenticatedEvaluationsEnregistrerRoute
   '/_authenticated/parametres/abonnement': typeof AuthenticatedParametresAbonnementRoute
   '/_authenticated/parametres/profil': typeof AuthenticatedParametresProfilRoute
   '/_authenticated/classes/$className/$studentName': typeof AuthenticatedClassesClassNameStudentNameRoute
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/classes/mes-classes'
     | '/eleves/creer-eleve'
     | '/eleves/mes-eleves'
+    | '/evaluations/enregistrer'
     | '/parametres/abonnement'
     | '/parametres/profil'
     | '/classes/$className/$studentName'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/classes/mes-classes'
     | '/eleves/creer-eleve'
     | '/eleves/mes-eleves'
+    | '/evaluations/enregistrer'
     | '/parametres/abonnement'
     | '/parametres/profil'
     | '/classes/$className/$studentName'
@@ -198,6 +210,7 @@ export interface FileRouteTypes {
     | '/_authenticated/classes/mes-classes'
     | '/_authenticated/eleves/creer-eleve'
     | '/_authenticated/eleves/mes-eleves'
+    | '/_authenticated/evaluations/enregistrer'
     | '/_authenticated/parametres/abonnement'
     | '/_authenticated/parametres/profil'
     | '/_authenticated/classes/$className/$studentName'
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       path: '/parametres/abonnement'
       fullPath: '/parametres/abonnement'
       preLoaderRoute: typeof AuthenticatedParametresAbonnementRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/evaluations/enregistrer': {
+      id: '/_authenticated/evaluations/enregistrer'
+      path: '/evaluations/enregistrer'
+      fullPath: '/evaluations/enregistrer'
+      preLoaderRoute: typeof AuthenticatedEvaluationsEnregistrerRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/eleves/mes-eleves': {
@@ -344,6 +364,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedClassesMesClassesRoute: typeof AuthenticatedClassesMesClassesRoute
   AuthenticatedElevesCreerEleveRoute: typeof AuthenticatedElevesCreerEleveRoute
   AuthenticatedElevesMesElevesRoute: typeof AuthenticatedElevesMesElevesRoute
+  AuthenticatedEvaluationsEnregistrerRoute: typeof AuthenticatedEvaluationsEnregistrerRoute
   AuthenticatedParametresAbonnementRoute: typeof AuthenticatedParametresAbonnementRoute
   AuthenticatedParametresProfilRoute: typeof AuthenticatedParametresProfilRoute
 }
@@ -357,6 +378,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedClassesMesClassesRoute: AuthenticatedClassesMesClassesRoute,
   AuthenticatedElevesCreerEleveRoute: AuthenticatedElevesCreerEleveRoute,
   AuthenticatedElevesMesElevesRoute: AuthenticatedElevesMesElevesRoute,
+  AuthenticatedEvaluationsEnregistrerRoute:
+    AuthenticatedEvaluationsEnregistrerRoute,
   AuthenticatedParametresAbonnementRoute:
     AuthenticatedParametresAbonnementRoute,
   AuthenticatedParametresProfilRoute: AuthenticatedParametresProfilRoute,
